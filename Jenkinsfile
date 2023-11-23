@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.9.0'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     options {
         skipStagesAfterUnstable()
     }
@@ -11,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test -f pom.xml'
+                sh 'mvn test'
             }
             post {
                 always {
@@ -19,30 +24,20 @@ pipeline {
                 }
             }
         }
-
-        stage('SonarQube Analysis') {
+        stage('Deliver') {
             steps {
-                script {
-                    withSonarQubeEnv('sonarqube') {
-                        sh 'mvn sonar:sonar -Pcoverage'
-                    }
-                }
+                sh './jenkins/scripts/deliver.sh'
             }
         }
-//        stage("Quality Gate") {
-//            steps {
-//              timeout(time: 5, unit: 'MINUTES') {
-//                waitForQualityGate abortPipeline: true
-//              }
-//            }
-//          }
-        stage('Deploy') {
-            steps {
-                echo "[INFO] ------------------------------------------------------------------------"
-                echo "[INFO] DEPLOYMENT SUCCESS"
-                echo "[INFO] ------------------------------------------------------------------------"
-                //sh './jenkins/scripts/deploy.sh'
-            }
+        stage('SonarQube Analysis') {
+                    steps {
+                        script {
+                            withSonarQubeEnv('sonarqube') {
+        //                        sh "${tool('sonar-scanner')}/bin/sonar-scanner -Dsonar.projectKey=myProjectKey -Dsonar.projectName=myProjectName"
+                                sh 'mvn clean package sonar:sonar'
+                            }
+                        }
+                    }
         }
     }
 }
