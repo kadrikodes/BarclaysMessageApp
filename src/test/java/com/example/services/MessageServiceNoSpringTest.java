@@ -3,10 +3,12 @@ package com.example.services;
 import com.example.TestUtilities;
 import com.example.dataaccess.MessageRepository;
 import com.example.entities.Message;
+import com.example.entities.Person;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +82,26 @@ public class MessageServiceNoSpringTest {
        assertEquals(message.getContent(), actualMessage.getContent());
        assertEquals(message.getId(), actualMessage.getId());
 
+    }
+
+    @Test
+    void testStupidCoverage() {
+        String name = "Kadri";
+        String email = "kadri@email.com";
+        int age = 26;
+
+        Person sender = new Person(name, email, age);
+
+        Message message = new Message("Howdy", sender);
+
+        List<Message> messages = new ArrayList<>();
+        messages.add(message);
+
+        when(mockRepo.findMessagesBySenderName(name)).thenReturn(messages);
+
+        messageService.getMessagesBySenderName(name);
+
+        verify(mockRepo, times(1)).findMessagesBySenderName(name);
     }
 
 
