@@ -85,7 +85,7 @@ public class MessageServiceNoSpringTest {
     }
 
     @Test
-    void testStupidCoverage() {
+    void testFindMessageByName() {
         String name = "Kadri";
         String email = "kadri@email.com";
         int age = 26;
@@ -102,6 +102,26 @@ public class MessageServiceNoSpringTest {
         messageService.getMessagesBySenderName(name);
 
         verify(mockRepo, times(1)).findMessagesBySenderName(name);
+    }
+
+    @Test
+    void testFindMessageByEmail() {
+        String name = "Kadri";
+        String email = "kadri@email.com";
+        int age = 26;
+
+        Person sender = new Person(name, email, age);
+
+        Message message = new Message("Howdy", sender);
+
+        List<Message> messages = new ArrayList<>();
+        messages.add(message);
+
+        when(mockRepo.findMessagesBySenderEmail(email)).thenReturn(messages);
+
+        messageService.getMessagesBySenderEmail(email);
+
+        verify(mockRepo, times(1)).findMessagesBySenderEmail(email);
     }
 
 

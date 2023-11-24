@@ -26,21 +26,17 @@ public class Message {
     }
 
     public Message()  {}
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
+//    public Long getId() {
+//        return Id;
+//    }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
     public Person getSender() {
         return sender;
     }
