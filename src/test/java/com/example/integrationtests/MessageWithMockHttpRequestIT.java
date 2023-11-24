@@ -1,4 +1,4 @@
-package com.example.integrationtests.messageintegrationtests;
+package com.example.integrationtests;
 
 import com.example.TestConstants;
 import com.example.entities.Message;

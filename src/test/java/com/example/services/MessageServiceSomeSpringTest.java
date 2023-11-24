@@ -1,11 +1,15 @@
-package com.example.services.messageservices;
+package com.example.services;
 
 import com.example.TestUtilities;
 import com.example.dataaccess.MessageRepository;
 import com.example.entities.Message;
 import com.example.services.MessageService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,26 +17,29 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class MessageServiceNoSpringTest {
-    MessageRepository mockRepo;
-    MessageService messageService;
+@SpringBootTest
+public class MessageServiceSomeSpringTest {
 
-    TestUtilities testUtilities;
+    @Autowired
+    MessageService messageService;
+    TestUtilities testUtilities = new TestUtilities();
+
+
+    @MockBean
+    MessageRepository mockRepo;
 
     @BeforeEach
     void beforeEach() {
-        mockRepo = mock(MessageRepository.class);
-        messageService = new MessageService(mockRepo);
-        testUtilities = new TestUtilities();
+        reset(mockRepo);
     }
 
     @Test
-    void findAll() {
+    void findAllWithSpringDi() {
         List<Message> messages = testUtilities.createMessageList();
         when(mockRepo.findAll()).thenReturn(messages);
         List<Message> actualMessages = messageService.findAll();
 
-        assertEquals(messages, actualMessages);
+        Assertions.assertEquals(messages, actualMessages);
     }
 
     @Test
@@ -43,7 +50,7 @@ public class MessageServiceNoSpringTest {
 
     @Test
     void testGetMessagesByIdOptionalEmpty() {
-        long messageId = 1L;
+        long messageId = 1;
         Optional<Message> optionalMessage = Optional.empty();
         when(mockRepo.findById(messageId)).thenReturn(optionalMessage);
 
@@ -54,34 +61,33 @@ public class MessageServiceNoSpringTest {
 
     @Test
     void testGetMessageByIdOptionalNotEmpty() {
-        long messageId = 1L;
+        long messageId = 1;
         Optional<Message> optionalMessage = Optional.of(new Message("Howdy"));
-
         when(mockRepo.findById(messageId)).thenReturn(optionalMessage);
 
         Message actualMessage = messageService.getMessageById(messageId);
 
+        // Assert that the repository's findById method is called with the correct messageId
         verify(mockRepo, times(1)).findById(messageId);
 
+        // Assert that the actualMessage is not null
         assertNotNull(actualMessage);
+
 
     }
 
     @Test
     void testGetMessageByIdOptionalNotEmptyDavesWay() {
-        long messageId = 1L;
+        long messageId = 1;
 
         Message message = new Message("Howdy");
-
         when(mockRepo.findById(any())).thenReturn(Optional.of(message));
 
         Message actualMessage = messageService.getMessageById(messageId);
 
-       assertEquals(message.getContent(), actualMessage.getContent());
-       assertEquals(message.getId(), actualMessage.getId());
+        assertEquals(message.getContent(), actualMessage.getContent());
+        assertEquals(message.getId(), actualMessage.getId());
 
     }
-
-
 
 }

@@ -1,14 +1,12 @@
-package com.example.services.personservices;
+package com.example.services;
 
 import com.example.TestUtilities;
 import com.example.dataaccess.PersonRepository;
 import com.example.entities.Person;
 import com.example.services.PersonService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,20 +14,22 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
-public class PersonServiceSomeSprintTest {
+public class PersonServiceNoSpringTest {
 
-    @Autowired
+    PersonRepository mockRepo;
     PersonService personService;
 
-    @Autowired
-    TestUtilities testUtilities = new TestUtilities();
+    TestUtilities testUtilities;
 
-    @MockBean
-    PersonRepository mockRepo;
+    @BeforeEach
+    void beforeEach() {
+        mockRepo = mock(PersonRepository.class);
+        personService = new PersonService(mockRepo);
+        testUtilities = new TestUtilities();
+    }
 
     @Test
-    void findAllWithSpringDi() {
+    void findAll() {
         List<Person> people = testUtilities.createPersonList();
         when(mockRepo.findAll()).thenReturn(people);
         List<Person> actualPeople = personService.findAll();
@@ -45,7 +45,7 @@ public class PersonServiceSomeSprintTest {
 
     @Test
     void testGetPersonByIdOptionalEmpty() {
-        long personId = 1;
+        long personId = 1L;
         Optional<Person> optionalPerson = Optional.empty();
         when(mockRepo.findById(personId)).thenReturn(optionalPerson);
 
@@ -56,26 +56,25 @@ public class PersonServiceSomeSprintTest {
 
     @Test
     void testGetPersonByIdOptionalNotEmpty() {
-        long personId = 1;
+        long personId = 1L;
         Optional<Person> optionalPerson = Optional.of(new Person("Kadri", "kadri@2cool.com",26));
+
         when(mockRepo.findById(personId)).thenReturn(optionalPerson);
 
         Person actualPerson = personService.getPersonById(personId);
 
-        // Assert that the repository's findById method is called with the correct messageId
         verify(mockRepo, times(1)).findById(personId);
 
-        // Assert that the actualMessage is not null
         assertNotNull(actualPerson);
-
 
     }
 
     @Test
     void testGetPersonByIdOptionalNotEmptyDavesWay() {
-        long personId = 1;
+        long personId = 1L;
 
         Person person = new Person("Kadri", "kadri@2cool.com",26);
+
         when(mockRepo.findById(any())).thenReturn(Optional.of(person));
 
         Person actualPerson = personService.getPersonById(personId);
@@ -92,5 +91,8 @@ public class PersonServiceSomeSprintTest {
 
         verify(mockRepo, times(1)).save(person);
     }
+
+
+
 
 }

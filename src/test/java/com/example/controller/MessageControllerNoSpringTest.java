@@ -1,4 +1,4 @@
-package com.example.controller.messagecontrollertest;
+package com.example.controller;
 
 import com.example.controller.MessageController;
 import com.example.entities.Message;

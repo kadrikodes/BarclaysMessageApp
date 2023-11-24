@@ -1,4 +1,4 @@
-package com.example.integrationtests.personintegrationtests;
+package com.example.integrationtests;
 
 import com.example.TestConstants;
 import com.example.entities.Person;

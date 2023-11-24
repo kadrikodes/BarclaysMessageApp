@@ -1,6 +1,5 @@
-package com.example.controller.messagecontrollertest;
+package com.example.controller;
 
-import com.example.controller.MessageController;
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.Test;

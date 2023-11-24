@@ -1,4 +1,4 @@
-package com.example.integrationtests.personintegrationtests;
+package com.example.integrationtests;
 
 import com.example.entities.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
