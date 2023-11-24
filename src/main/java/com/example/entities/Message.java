@@ -26,9 +26,9 @@ public class Message {
     }
 
     public Message()  {}
-//    public Long getId() {
-//        return Id;
-//    }
+    public Long getId() {
+        return Id;
+    }
 
     public String getContent() {
         return content;
