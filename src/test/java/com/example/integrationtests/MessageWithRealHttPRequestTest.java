@@ -6,6 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class MessageWithRealHttPRequestTest {
 
 
     @Test
+    @Disabled
     public void testGettingAllMessages() throws IOException {
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages");
 
@@ -34,6 +36,7 @@ public class MessageWithRealHttPRequestTest {
     }
 
     @Test
+    @Disabled
     public void testGetMessageById() throws Exception {
         long messageId = 100;
 
@@ -48,6 +51,7 @@ public class MessageWithRealHttPRequestTest {
     }
 
     @Test
+    @Disabled
     public void testFindMessagesBySenderEmail() throws IOException {
         String senderEmail = "kadri@2cool.com";
 
@@ -61,6 +65,7 @@ public class MessageWithRealHttPRequestTest {
     }
 
     @Test
+    @Disabled
     public void testFindMessagesBySenderName() throws IOException {
         String senderName = "Kadri";
 

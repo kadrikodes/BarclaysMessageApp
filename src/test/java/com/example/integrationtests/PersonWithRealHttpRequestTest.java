@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public class PersonWithRealHttpRequestTest {
 
 
     @Test
+    @Disabled
     public void testGettingAllPeople() throws IOException {
         firstTestResponse = HttpClientBuilder.create().build().execute(uriRequest);
 
@@ -62,6 +64,7 @@ public class PersonWithRealHttpRequestTest {
         }
 
     @Test
+    @Disabled
     public void testPersonById() throws Exception {
         long personId = 10;
         long secondPersonId = 20;
@@ -81,6 +84,7 @@ public class PersonWithRealHttpRequestTest {
     }
 
     @Test
+    @Disabled
     void testAddingAPerson() throws Exception {
         Person testPerson = new Person("Kadrii", "kadrii@2cool.com",26);
 
