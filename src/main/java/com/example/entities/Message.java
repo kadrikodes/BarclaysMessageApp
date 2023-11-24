@@ -34,9 +34,6 @@ public class Message {
         return content;
     }
 
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
     public Person getSender() {
         return sender;
     }

@@ -24,11 +24,6 @@ public class MessageController {
         return messageService.findAll();
     }
 
-    @GetMapping("/messages/create")
-    public List<Message> createMessageList() {
-        return messageService.findAll();
-    }
-
     @GetMapping("/messages/{messageId}")
     public Message getMessageById(@PathVariable long messageId) {
         Message message = messageService.getMessageById(messageId);

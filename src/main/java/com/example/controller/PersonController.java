@@ -24,11 +24,6 @@ public class PersonController {
         return personService.findAll();
     }
 
-    @GetMapping("/persons/create")
-    public List<Person> createPeopleList() {
-        return personService.findAll();
-    }
-
     @GetMapping("/persons/{personId}")
     public Person getPersonById(@PathVariable long personId) {
         Person person = personService.getPersonById(personId);

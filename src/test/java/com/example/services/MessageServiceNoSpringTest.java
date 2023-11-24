@@ -4,7 +4,6 @@ import com.example.TestUtilities;
 import com.example.dataaccess.MessageRepository;
 import com.example.entities.Message;
 import com.example.entities.Person;
-import com.example.services.MessageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -123,7 +122,4 @@ public class MessageServiceNoSpringTest {
 
         verify(mockRepo, times(1)).findMessagesBySenderEmail(email);
     }
-
-
-
 }

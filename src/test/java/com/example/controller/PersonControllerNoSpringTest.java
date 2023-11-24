@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.controller.PersonController;
 import com.example.entities.Person;
 import com.example.services.PersonService;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,9 +37,7 @@ class PersonControllerNoSpringTest {
     @Test
     void testGetPersonById() {
         Long personId = 1L;
-//        try {
-//            this.personController.getPersonById(personId);
-//        } catch (ResponseStatusException rse) {}
+
         when(mockPersonService.getPersonById(personId)).thenReturn(new Person("Kadri", "kadri@2cool.com",26));
         personController.getPersonById(personId);
 

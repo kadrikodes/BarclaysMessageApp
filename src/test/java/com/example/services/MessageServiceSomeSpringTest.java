@@ -3,7 +3,6 @@ package com.example.services;
 import com.example.TestUtilities;
 import com.example.dataaccess.MessageRepository;
 import com.example.entities.Message;
-import com.example.services.MessageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

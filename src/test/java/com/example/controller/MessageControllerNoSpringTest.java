@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.controller.MessageController;
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,9 +30,6 @@ class MessageControllerNoSpringTest {
     @Test
     void testGetMessageByIdDavesWay() {
         Long messageId = 1L;
-//        try {
-//            this.messageController.getMessageById(messageId);
-//        } catch (ResponseStatusException rse) {}
 
         when(mockMessageService.getMessageById(messageId)).thenReturn(new Message("howdy"));
         this.messageController.getMessageById(messageId);

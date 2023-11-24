@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.TestUtilities;
-import com.example.controller.MessageController;
+
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.Test;
@@ -48,16 +48,8 @@ class MessageControllerFullSpringTest {
 
         ResultActions resultActions = this.mockMvc.perform(
                 MockMvcRequestBuilders.get("/messages"));
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .accept("application/json")
         resultActions.andExpect(status().isOk());
-        MvcResult result = resultActions.andReturn();
 
-//        String contentAsString = result.getResponse().getContentAsString();
-//        ObjectMapper mapper = new ObjectMapper();
-//        Message[] actualMessages = mapper.readValue(contentAsString, Message[].class);
-//        Assertions.assertEquals(messages.size(), actualMessages.length);
-//        Assertions.assertEquals(messages.toArray(), actualMessages);
 
         verify(mockMessageService, times(1)).findAll();
     }

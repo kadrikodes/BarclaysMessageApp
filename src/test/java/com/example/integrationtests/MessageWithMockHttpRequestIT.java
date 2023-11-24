@@ -131,8 +131,6 @@ public class MessageWithMockHttpRequestIT {
         Message[] messages = mapper.readValue(contentAsJson, Message[].class);
         Message[] secondMessages = mapper.readValue(secondContentAsJson, Message[].class);
 
-//        assertEquals(1, messages.length);
-
         assertEquals("Fourth test message", messages[0].getContent());
         assertEquals("Third test message", secondMessages[0].getContent());
     }

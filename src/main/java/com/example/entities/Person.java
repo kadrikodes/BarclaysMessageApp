@@ -7,7 +7,6 @@ import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Person {
@@ -61,25 +60,4 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj == null || getClass() != obj.getClass()) {
-//            return false;
-//        }
-//        Person person = (Person) obj;
-//        return age == person.age &&
-//                Objects.equals(name, person.name) &&
-//                Objects.equals(email, person.email);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(name, email, age);
-//    }
-
-
 }
